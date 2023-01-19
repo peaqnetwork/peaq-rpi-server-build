@@ -4,6 +4,9 @@ const tslib_1 = require("tslib");
 const connection_1 = (0, tslib_1.__importDefault)(require("./connection"));
 function socket(io) {
     global.io = io;
+    setInterval(() => {
+        io.emit('server_online', global.machineKeyPair.address);
+    }, 5000);
     io.on('connection', (socket) => {
         console.log('a user connected');
         new connection_1.default(io, socket);
