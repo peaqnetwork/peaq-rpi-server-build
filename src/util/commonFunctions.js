@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getDIDDocument = exports.createStorageKeys = exports.getMachineKeyPair = exports.routesGenerator = void 0;
+exports.getNetworkApi = exports.getDIDDocument = exports.createStorageKeys = exports.getMachineKeyPair = exports.routesGenerator = void 0;
 const tslib_1 = require("tslib");
 require("@polkadot/api-augment/polkadot");
 const api_1 = require("@polkadot/api");
@@ -48,7 +48,7 @@ const getMachineKeyPair = () => (0, tslib_1.__awaiter)(void 0, void 0, void 0, f
 exports.getMachineKeyPair = getMachineKeyPair;
 const makePalletQuery = (palletName, storeName, args) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
     try {
-        const api = yield getNetworkApi();
+        const api = yield (0, exports.getNetworkApi)();
         const data = yield api.query[palletName][storeName](...args);
         api.disconnect();
         return data.toHuman();
@@ -90,17 +90,21 @@ const getDIDDocument = (keyPair) => (0, tslib_1.__awaiter)(void 0, void 0, void 
 exports.getDIDDocument = getDIDDocument;
 const getNetworkApi = () => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
     try {
+        if (global.networkApi)
+            return global.networkApi;
         const api = new api_1.ApiPromise({
             provider: new api_1.WsProvider(constants_1.PEAQ_AGUNG_NETWORK),
         });
         yield api.isReadyOrError;
+        global.networkApi = api;
         return api;
     }
     catch (error) {
-        console.error('getCrustNetworkApi error', error);
+        console.error('getNetworkApi error', error);
         throw error;
     }
 });
+exports.getNetworkApi = getNetworkApi;
 exports.default = {
     routesGenerator: exports.routesGenerator,
 };
