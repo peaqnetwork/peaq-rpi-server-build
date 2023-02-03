@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createNFTItemValidator = void 0;
+exports.createItemValidator = void 0;
 const tslib_1 = require("tslib");
 const joi_1 = (0, tslib_1.__importDefault)(require("joi"));
 const constants_1 = require("../../util/constants");
 const responses_1 = require("../../util/responses");
-const createNFTItemValidator = function (req, res, next) {
+const createItemValidator = function (req, res, next) {
     const schema = joi_1.default.object().keys({
         title: joi_1.default.string().required(),
         description: joi_1.default.string().required(),
@@ -23,5 +23,5 @@ const createNFTItemValidator = function (req, res, next) {
     }
     next();
 };
-exports.createNFTItemValidator = createNFTItemValidator;
+exports.createItemValidator = createItemValidator;
 //# sourceMappingURL=validator.js.map
