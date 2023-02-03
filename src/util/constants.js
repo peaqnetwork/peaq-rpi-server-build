@@ -27,5 +27,5 @@ exports.RESPONSE_TYPES = {
         status: 401,
     }
 };
-exports.PEAQ_AGUNG_NETWORK = "wss://wsspc1.agung.peaq.network";
+exports.PEAQ_AGUNG_NETWORK = "wss://wsspc3.agung.peaq.network";
 //# sourceMappingURL=constants.js.map
