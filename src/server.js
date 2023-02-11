@@ -18,7 +18,8 @@ app.use(express_1.default.json({
     limit: '5mb'
 }));
 app.use((0, cors_1.default)());
-app.use('/api', routes_1.default);
+app.use('/', () => {
+}, routes_1.default);
 (0, commonFunctions_1.getMachineKeyPair)().then((pair) => {
     global.networkApi = null;
     global.machineKeyPair = pair;
